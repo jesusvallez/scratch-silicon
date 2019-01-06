@@ -81,7 +81,13 @@ const StageHeaderComponent = function (props) {
         ) : (
             <Button
                 className={styles.stageButton}
-                onClick={onSetStageUnFull}
+                onClick={() => {
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    } else {
+                        document.body.requestFullscreen();
+                    }
+                }}
                 onKeyPress={onKeyPress}
             >
                 <img
