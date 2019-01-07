@@ -50,7 +50,7 @@ const getStageDimensions = (stageSize, isFullScreen) => {
         scale: 0
     };
 
-    if (isFullScreen) {
+    if (true) {
         stageDimensions.height = window.innerHeight -
             STAGE_DIMENSION_DEFAULTS.menuHeightAdjustment -
             STAGE_DIMENSION_DEFAULTS.fullScreenSpacingBorderAdjustment;
@@ -63,12 +63,7 @@ const getStageDimensions = (stageSize, isFullScreen) => {
         }
 
         stageDimensions.scale = stageDimensions.width / stageDimensions.widthDefault;
-    } else {
-        stageDimensions.scale = STAGE_DISPLAY_SCALES[stageSize];
-        stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
-        stageDimensions.width = stageDimensions.scale * stageDimensions.widthDefault;
     }
-
     // Round off dimensions to prevent resampling/blurriness
     stageDimensions.height = Math.round(stageDimensions.height);
     stageDimensions.width = Math.round(stageDimensions.width);

@@ -61,9 +61,10 @@ const StageHeaderComponent = function (props) {
         vm
     } = props;
 
+    onSetStageFull();
     let header = null;
 
-    if (isFullScreen) {
+    if (true) {
         const stageDimensions = getStageDimensions(null, true);
         const stageButton = showBranding ? (
             <div className={styles.embedScratchLogo}>
@@ -94,7 +95,7 @@ const StageHeaderComponent = function (props) {
                     alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
                     className={styles.stageButtonIcon}
                     draggable={false}
-                    src={unFullScreenIcon}
+                    src={document.fullscreenElement ? unFullScreenIcon : fullScreenIcon}
                     title={props.intl.formatMessage(messages.fullscreenControl)}
                 />
             </Button>
@@ -107,72 +108,6 @@ const StageHeaderComponent = function (props) {
                 >
                     <Controls vm={vm} />
                     {stageButton}
-                </Box>
-            </Box>
-        );
-    } else {
-        const stageControls =
-            isPlayerOnly ? (
-                []
-            ) : (
-                <div className={styles.stageSizeToggleGroup}>
-                    <div>
-                        <Button
-                            className={classNames(
-                                styles.stageButton,
-                                styles.stageButtonFirst,
-                                (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonToggledOff
-                            )}
-                            onClick={onSetStageSmall}
-                        >
-                            <img
-                                alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
-                                className={styles.stageButtonIcon}
-                                draggable={false}
-                                src={smallStageIcon}
-                            />
-                        </Button>
-                    </div>
-                    <div>
-                        <Button
-                            className={classNames(
-                                styles.stageButton,
-                                styles.stageButtonLast,
-                                (stageSizeMode === STAGE_SIZE_MODES.large) ? null : styles.stageButtonToggledOff
-                            )}
-                            onClick={onSetStageLarge}
-                        >
-                            <img
-                                alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
-                                className={styles.stageButtonIcon}
-                                draggable={false}
-                                src={largeStageIcon}
-                            />
-                        </Button>
-                    </div>
-                </div>
-            );
-        header = (
-            <Box className={styles.stageHeaderWrapper}>
-                <Box className={styles.stageMenuWrapper}>
-                    <Controls vm={vm} />
-                    <div className={styles.stageSizeRow}>
-                        {stageControls}
-                        <div>
-                            <Button
-                                className={styles.stageButton}
-                                onClick={onSetStageFull}
-                            >
-                                <img
-                                    alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
-                                    className={styles.stageButtonIcon}
-                                    draggable={false}
-                                    src={fullScreenIcon}
-                                    title={props.intl.formatMessage(messages.fullscreenControl)}
-                                />
-                            </Button>
-                        </div>
-                    </div>
                 </Box>
             </Box>
         );

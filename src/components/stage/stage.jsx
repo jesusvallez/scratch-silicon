@@ -32,15 +32,16 @@ const StageComponent = props => {
         ...boxProps
     } = props;
 
-    const stageDimensions = getStageDimensions(stageSize, isFullScreen);
+    var stageDimensions = getStageDimensions(stageSize, true);
+    window.onresize = () => stageDimensions = getStageDimensions(stageSize, true);
 
     return (
         <div>
             <Box
                 className={classNames({
-                    [styles.stageWrapper]: !isFullScreen,
-                    [styles.stageWrapperOverlay]: isFullScreen,
-                    [styles.withColorPicker]: !isFullScreen && isColorPicking
+                    [styles.stageWrapper]: !true,
+                    [styles.stageWrapperOverlay]: true,
+                    [styles.withColorPicker]: !true && isColorPicking
                 })}
                 style={{
                     minHeight: stageDimensions.height,
@@ -51,7 +52,7 @@ const StageComponent = props => {
                 <Box
                     className={classNames(
                         styles.stage,
-                        {[styles.stageOverlayContent]: isFullScreen}
+                        {[styles.stageOverlayContent]: true}
                     )}
                     style={{
                         height: stageDimensions.height,
